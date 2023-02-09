@@ -8,11 +8,13 @@ specifiers:
   vue: ^3.2.45
   vue-router: '4'
   vue-tsc: ^1.0.24
+  vuetify: ^3.1.4
 
 dependencies:
   pinia: 2.0.0-rc.10_hmuptsblhheur2tugfgucj7gc4
   vue: 3.2.47
   vue-router: 4.1.6_vue@3.2.47
+  vuetify: 3.1.4_vue@3.2.47
 
 devDependencies:
   '@vitejs/plugin-vue': 4.0.0_vite@4.1.1+vue@3.2.47
@@ -630,3 +632,22 @@ packages:
       '@vue/runtime-dom': 3.2.47
       '@vue/server-renderer': 3.2.47_vue@3.2.47
       '@vue/shared': 3.2.47
+
+  /vuetify/3.1.4_vue@3.2.47:
+    resolution: {integrity: sha512-6ERm2a0bJyMLjmRKTifN501o3MsCVp9agtoZsORw1b3X29ycTdXOJdRMEADaDSv59dBWwUVv3WqHcWzCG4Gwfw==}
+    engines: {node: ^12.20 || >=14.13}
+    peerDependencies:
+      vite-plugin-vuetify: ^1.0.0-alpha.12
+      vue: ^3.2.0
+      vue-i18n: ^9.0.0
+      webpack-plugin-vuetify: ^2.0.0-alpha.11
+    peerDependenciesMeta:
+      vite-plugin-vuetify:
+        optional: true
+      vue-i18n:
+        optional: true
+      webpack-plugin-vuetify:
+        optional: true
+    dependencies:
+      vue: 3.2.47
+    dev: false

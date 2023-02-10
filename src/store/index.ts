@@ -1,5 +1,13 @@
-import { createPinia } from "pinia";
+import { createPinia, Pinia } from 'pinia'
 
-const store = createPinia()
+let piniaInstance: Pinia|null = null
 
-export default store
+const pinia = (): Pinia => {
+    if (piniaInstance !== null) return piniaInstance
+
+    piniaInstance = createPinia()
+
+    return piniaInstance
+}
+
+export default pinia

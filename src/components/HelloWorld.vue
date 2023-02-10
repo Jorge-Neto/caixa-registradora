@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import store from '@/store/index';
 import { useCounterStore } from '@/store/counter'
 
-const counterStore = useCounterStore()
+const counterStore = useCounterStore(store())
 
 const msg = ref<string>("Hi")
 </script>
@@ -11,7 +12,7 @@ const msg = ref<string>("Hi")
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="counterStore.increment()">count is {{ counterStore.count }}</button>
+    <v-btn type="button" @click="counterStore.increment()">count is {{ counterStore.count }}</v-btn>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

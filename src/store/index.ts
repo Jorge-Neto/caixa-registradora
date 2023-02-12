@@ -1,6 +1,6 @@
-import { createPinia, Pinia } from 'pinia'
+import { createPinia, Pinia } from "pinia"
 
-let piniaInstance: Pinia|null = null
+let piniaInstance: Pinia | null = null
 
 const pinia = (): Pinia => {
     if (piniaInstance !== null) return piniaInstance

@@ -1,31 +1,41 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createApp } from "vue/dist/vue.esm-bundler"
 import App from "@/App.vue"
 import store from "@/store"
 import router from "@/router"
+import { Store } from "pinia"
+import { useProductStore } from "@/store/product"
 import "@/style.css"
-import { useCounterStore } from "@/store/counter"
 
 import "vuetify/styles"
 import { createVuetify } from "vuetify"
 import * as components from "vuetify/components"
 import * as directives from "vuetify/directives"
-import { Store } from "pinia"
+import { aliases, mdi } from "vuetify/iconsets/mdi"
 
 const vuetify = createVuetify({
     components,
     directives,
+    icons: {
+        defaultSet: "mdi",
+        aliases,
+        sets: {
+            mdi,
+        },
+    },
 })
 
 declare global {
     interface Window {
         Cypress?: Cypress.Cypress
-        __counter_store__?: Store
+        //@ts-ignore
+        __product_store__?: Store
     }
 }
 
 if (window.Cypress) {
-    const CounterStore = useCounterStore()
-    window.__counter_store__ = CounterStore
+    const ProductStore = useProductStore()
+    window.__product_store__ = ProductStore
 }
 
 createApp(App).use(store).use(router).use(vuetify).mount("#app")

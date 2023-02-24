@@ -1,38 +1,15 @@
 <script setup lang="ts">
-import store from "@/store/index"
-import { useProductStore } from "@/store/product"
-import { computed } from "vue"
+import { ProductInterface } from "@/types/productType"
 
-const productStore = useProductStore(store())
-
-const products = computed(() => productStore.products)
-
-const deleteProduct = (id) => {
-    productStore.deleteProduct(id)
-}
+defineProps<{
+    products?: Array<ProductInterface>
+    deleteProduct: (unknown) => void
+}>()
 </script>
 
 <template>
     <div>
-        <v-card class="d-block d-sm-none mx-auto mb-3" max-width="344" v-for="product in products" :key="product.id">
-            <v-card-item>
-                <div>
-                    <div class="text-overline mb-1">Data - Hora</div>
-                    <div class="text-h6 mb-1">
-                        {{ product.name }}
-                    </div>
-                    <div class="text-caption">{{ product.unitaryValue }} {{ product.measure }} x {{ product.quantity }}</div>
-                </div>
-            </v-card-item>
-
-            <v-card-actions>
-                <span>R${{ product.unitaryValue * product.quantity }}</span>
-                <v-spacer></v-spacer>
-                <v-btn color="error" variant="tonal" @click="deleteProduct(product.id)">Remover</v-btn>
-            </v-card-actions>
-        </v-card>
-
-        <v-card class="d-none d-sm-block">
+        <v-card class="mb-3">
             <v-table fixed-header>
                 <thead>
                     <tr>

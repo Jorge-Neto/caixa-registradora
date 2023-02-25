@@ -1,4 +1,4 @@
-import { ProductInterface } from "@/types/productType"
+import { ProductInterface } from "@/interfaces/productInterface"
 import { defineStore } from "pinia"
 import { ref } from "vue"
 
@@ -24,5 +24,9 @@ export const useProductStore = defineStore("product", () => {
         products.value = products.value.filter((product) => product.id != id)
     }
 
-    return { products, deleteProduct }
+    const includeProduct = (product: ProductInterface) => {
+        products.value = [...products.value, product]
+    }
+
+    return { products, deleteProduct, includeProduct }
 })

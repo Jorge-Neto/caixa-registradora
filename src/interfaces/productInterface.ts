@@ -5,3 +5,10 @@ export interface ProductInterface {
     measure: "Quilograma" | "Unidade"
     quantity: number
 }
+
+export interface IncludeProductInterface {
+    name: string
+    unitaryValue: string | number
+    measure: string | null
+    quantity: string | number
+}

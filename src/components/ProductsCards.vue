@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ProductInterface } from "@/types/productType"
+import { ProductInterface } from "@/interfaces/productInterface"
 
 defineProps<{
     products?: Array<ProductInterface>
-    deleteProduct: (unknown) => void
 }>()
 </script>
 
@@ -23,7 +22,7 @@ defineProps<{
             <v-card-actions>
                 <span>R${{ product.unitaryValue * product.quantity }}</span>
                 <v-spacer></v-spacer>
-                <v-btn color="error" @click="deleteProduct(product.id)">Remover</v-btn>
+                <v-btn color="error" @click="$emit('deleteProduct', product.id)">Remover</v-btn>
             </v-card-actions>
         </v-card>
     </div>

@@ -13,7 +13,7 @@ import { ProductInterface } from "@/interfaces/productInterface"
 const productStore = useProductStore(store())
 const showIncludeModal = ref<boolean>(false)
 
-const products = computed<Array<ProductInterface>>(() => productStore.products)
+const products = computed<Array<ProductInterface>>(() => productStore.productsList)
 
 const deleteProduct = (id) => {
     productStore.deleteProduct(id)
@@ -29,13 +29,7 @@ const toggleIncludeDialog = (value: boolean) => {
 }
 
 onMounted(async () => {
-    try {
-        const { data, error, status } = await supabase.from("products").select(`*`)
-
-        console.log(data, error, status)
-    } catch (error) {
-        console.log(error)
-    }
+    productStore.fetchProducts()
 })
 </script>
 

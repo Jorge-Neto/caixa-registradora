@@ -3,6 +3,7 @@ import { defineStore } from "pinia"
 import { ref } from "vue"
 
 export const useProductStore = defineStore("product", () => {
+    const testTime = new Date()
     const products = ref<Array<ProductInterface>>([
         {
             id: 1,
@@ -10,6 +11,7 @@ export const useProductStore = defineStore("product", () => {
             unitaryValue: 0.5,
             measure: "Quilograma",
             quantity: 3,
+            includedAt: testTime,
         },
         {
             id: 2,
@@ -17,6 +19,7 @@ export const useProductStore = defineStore("product", () => {
             unitaryValue: 3,
             measure: "Unidade",
             quantity: 3,
+            includedAt: testTime,
         },
     ])
 

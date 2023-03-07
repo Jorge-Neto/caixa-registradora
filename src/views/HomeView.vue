@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { onMounted } from "vue"
 import ProductsTable from "@/components/ProductsTable.vue"
 import ProductsCards from "@/components/ProductsCards.vue"
 import IncludeModal from "@/components/IncludeModal.vue"
+import { supabase } from "@/lib/supabase"
 
 import store from "@/store/index"
 import { useProductStore } from "@/store/product"
@@ -18,7 +20,6 @@ const deleteProduct = (id) => {
 }
 
 const includeProduct = (product: ProductInterface) => {
-    console.log(product)
     productStore.includeProduct(product)
     showIncludeModal.value = false
 }
@@ -26,6 +27,16 @@ const includeProduct = (product: ProductInterface) => {
 const toggleIncludeDialog = (value: boolean) => {
     showIncludeModal.value = value
 }
+
+onMounted(async () => {
+    try {
+        const { data, error, status } = await supabase.from("products").select(`*`)
+
+        console.log(data, error, status)
+    } catch (error) {
+        console.log(error)
+    }
+})
 </script>
 
 <template>

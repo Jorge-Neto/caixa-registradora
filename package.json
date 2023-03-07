@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext .ts,.vue"
+    "lint": "eslint src --ext .ts,.vue",
+    "update-types": "pnpx supabase gen types typescript --project-id 'giqugaaynzpfrwgidjsl' > src/types/supabase.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.10.0",
     "pinia": "2.0.0-rc.10",
     "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.2.45",

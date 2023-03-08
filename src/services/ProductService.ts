@@ -17,6 +17,14 @@ class ProductService {
         return []
     }
 
+    deleteItem = async (productId: number | string): Promise<void> => {
+        try {
+            await supabase.from("products").delete().eq("id", productId)
+        } catch (error) {
+            console.error("error", error)
+        }
+    }
+
     //   getByDate = async (date: string): Promise<Product[]> => {
     // const newDate: string = new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString()
     // const newDateLimit: string = new Date(new Date(date).setHours(23, 59, 59)).toISOString()
@@ -40,7 +48,7 @@ class ProductService {
     // return []
     // }
 
-    //   addProduct = async (product: Product): Promise<null | number> => {
+    //   include = async (product: Product): Promise<null | number> => {
     // try {
     //   const { status, error } = await supabase.from('products').insert(product).single()
 
@@ -56,15 +64,6 @@ class ProductService {
     //   console.error('Error')
     //   console.error('Unknown problem inserting to db', err)
     //   return null
-    // }
-    //   }
-
-    //   deleteProduct = async (productId: number) => {
-    // try {
-    //   await supabase.from('products').delete().eq('id', productId)
-    // }
-    // catch (error) {
-    //   console.error('error', error)
     // }
     //   }
 }

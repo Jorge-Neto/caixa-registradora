@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase"
-import { ProductInterface as Product } from "@/interfaces/productInterface"
+import { ProductInterface as Product, IncludeProductInterface } from "@/interfaces/productInterface"
 
 class ProductService {
     getAll = async (): Promise<Product[]> => {
@@ -17,6 +17,24 @@ class ProductService {
         return []
     }
 
+    includeItem = async (product: IncludeProductInterface): Promise<null | number> => {
+        try {
+            const { status, error } = await supabase.from("products").insert(product).single()
+
+            if (error) {
+                console.error(error.message)
+                console.error("There was an error inserting", error)
+                return null
+            }
+
+            return status
+        } catch (err) {
+            console.error("Error")
+            console.error("Unknown problem inserting to db", err)
+            return null
+        }
+    }
+
     deleteItem = async (productId: number | string): Promise<void> => {
         try {
             await supabase.from("products").delete().eq("id", productId)
@@ -25,7 +43,7 @@ class ProductService {
         }
     }
 
-    //   getByDate = async (date: string): Promise<Product[]> => {
+    // getByDate = async (date: string): Promise<Product[]> => {
     // const newDate: string = new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString()
     // const newDateLimit: string = new Date(new Date(date).setHours(23, 59, 59)).toISOString()
 
@@ -47,25 +65,6 @@ class ProductService {
     // }
     // return []
     // }
-
-    //   include = async (product: Product): Promise<null | number> => {
-    // try {
-    //   const { status, error } = await supabase.from('products').insert(product).single()
-
-    //   if (error) {
-    //     console.error(error.message)
-    //     console.error('There was an error inserting', error)
-    //     return null
-    //   }
-
-    //   return status
-    // }
-    // catch (err) {
-    //   console.error('Error')
-    //   console.error('Unknown problem inserting to db', err)
-    //   return null
-    // }
-    //   }
 }
 
 export default ProductService

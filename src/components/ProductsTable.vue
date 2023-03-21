@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ProductInterface } from "@/interfaces/productInterface"
+import NoProductsCard from "@/components/NoProductsCard.vue"
 import { toLocaleBRL, formatTime } from "@/utils/filters"
 
 defineProps<{
@@ -10,10 +11,10 @@ defineProps<{
 <template>
     <div>
         <v-card class="mb-3">
-            <v-table fixed-header>
+            <v-table v-if="products?.length" fixed-header>
                 <thead>
                     <tr>
-                        <th class="text-left"></th>
+                        <th class="text-left">Hora</th>
                         <th class="text-left">Name</th>
                         <th class="text-left">Preço unitário</th>
                         <th class="text-left">Medida</th>
@@ -34,6 +35,8 @@ defineProps<{
                     </tr>
                 </tbody>
             </v-table>
+
+            <NoProductsCard v-else />
         </v-card>
     </div>
 </template>

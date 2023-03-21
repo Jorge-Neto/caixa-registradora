@@ -8,41 +8,68 @@ const form = ref()
 defineProps<{
     showIncludeModal: boolean
 }>()
-const emit = defineEmits(["includeProduct"])
-const product: IncludeProductInterface = {
-    name: "",
-    unitary_value: 0,
-    measure: "QuiloGrama",
-    quantity: 0,
-}
+const emit = defineEmits(["includeProduct", "closeDialog"])
 const name = ref<string>("")
 const unitary_value = ref<string | number>("")
 const quantity = ref<string | number>("")
-const measure = ref<string>("")
-const measureItems = ref<Array<string>>(["Quilograma", "Unidade"])
+const measure = ref<string>()
+const measureItems = ref<Array<string>>(["Quilograma", "Grama", "Unidade"])
 const lengthRule = ref<Array<ValidationRule>>([
     (value) => {
         if (value?.length > 2) return true
 
-        return "o nome do produto deve conter mais de 2 letras"
+        return "O nome do produto deve conter mais de 2 letras"
+    },
+    (value) => {
+        if (value) return true
+
+        return "Produto é obrigatório"
     },
 ])
 
+const changeValueLabel = () => {
+    if (!measure.value) return "Valor"
+    else if (measure.value === "Unidade") return "Valor da Unidade"
+    else return "Valor do Quilo"
+}
+
+const changeQuantityLabel = () => {
+    if (!measure.value) return "Quantidade"
+    else if (measure.value === "Unidade") return "Quantidade"
+    else return "Peso"
+}
+
+const clearFields = () => {
+    name.value = ""
+    unitary_value.value = ""
+    quantity.value = ""
+    measure.value = ""
+    form.value.resetValidation()
+    form.value.reset()
+}
+
 const saveProduct = () => {
+    if (measure.value === "Grama") {
+        measure.value = "Quilograma"
+        quantity.value = Number(quantity.value) / 1000
+    }
+
+    const newProduct: IncludeProductInterface = {
+        name: name.value,
+        unitary_value: Number(unitary_value.value),
+        measure: measure.value === "Unidade" ? "Unidade" : "Quilograma",
+        quantity: Number(quantity.value),
+    }
+
+    emit("includeProduct", newProduct)
+}
+
+const saveButtonPressed = () => {
     form.value.validate().then((res) => {
         if (res.valid) {
-            const newProduct: IncludeProductInterface = {
-                name: name.value,
-                unitary_value: unitary_value.value,
-                measure: measure.value,
-                quantity: quantity.value,
-            }
-            name.value = ""
-            unitary_value.value = 0
-            quantity.value = 0
-            measure.value = ""
-            form.value.reset()
-            emit("includeProduct", newProduct)
+            saveProduct()
+            clearFields()
+            emit("closeDialog", false)
         }
     })
 }
@@ -54,14 +81,24 @@ const saveProduct = () => {
             <v-btn size="x-small" color="red" icon="mdi-close" @click="$emit('closeDialog', false)"></v-btn>
         </template>
         <v-card-item>
-            <v-form ref="form" fast-fail @submit.prevent="saveProduct()" class="pt-1">
-                <v-text-field required v-model="product.name" label="Produto" :rules="lengthRule" variant="outlined"></v-text-field>
+            <v-form ref="form" fast-fail @submit.prevent="saveButtonPressed()" class="pt-1">
+                <v-text-field required v-model="name" label="Produto" :rules="lengthRule" variant="outlined"></v-text-field>
 
-                <v-text-field required v-model="unitary_value" type="number" label="Valor Unitário" prefix="R$" variant="outlined"></v-text-field>
+                <v-radio-group v-model="measure" label="Medida" inline>
+                    <v-radio v-for="(option, index) in measureItems" required :rules="[(v) => !!v || 'Medida é obrigatório']" :key="`option-${index}`" :label="option" :value="option"></v-radio>
+                </v-radio-group>
 
-                <v-text-field required v-model="quantity" label="Quantidade" variant="outlined"></v-text-field>
+                <v-text-field :rules="[(v) => !!v || 'Quantidade é obrigatório']" required v-model="quantity" type="number" :label="changeQuantityLabel()" variant="outlined"></v-text-field>
 
-                <v-select required v-model="measure" label="Medida" :items="measureItems" variant="outlined"></v-select>
+                <v-text-field
+                    :rules="[(v) => !!v || 'Valor unitário é obrigatório']"
+                    required
+                    v-model="unitary_value"
+                    type="number"
+                    :label="changeValueLabel()"
+                    prefix="R$"
+                    variant="outlined"
+                ></v-text-field>
 
                 <v-btn color="success" variant="tonal" type="submit" block class="mt-2">Adicionar</v-btn>
             </v-form>

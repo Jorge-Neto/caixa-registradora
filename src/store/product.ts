@@ -1,4 +1,4 @@
-import { ProductInterface as Product } from "@/interfaces/productInterface"
+import { ProductInterface as Product, IncludeProductInterface } from "@/interfaces/productInterface"
 import ProductService from "@/services/productService"
 import { defineStore } from "pinia"
 import { ref } from "vue"
@@ -14,13 +14,11 @@ export const useProductStore = defineStore("product", () => {
     const deleteProduct = async (id: number | string) => {
         await service.deleteItem(id)
         fetchProducts()
-        // productsList.value = productsList.value.filter((product) => product.id != id)
     }
 
-    const includeProduct = (product: Product) => {
-        const dateNow = new Date()
-        product.created_at = dateNow.toISOString()
-        productsList.value = [...productsList.value, product]
+    const includeProduct = async (product: IncludeProductInterface) => {
+        await service.includeItem(product)
+        fetchProducts()
     }
 
     return { productsList, fetchProducts, deleteProduct, includeProduct }

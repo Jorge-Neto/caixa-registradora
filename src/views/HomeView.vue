@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { onMounted } from "vue"
+import { onMounted, computed, ref } from "vue"
 import ProductsTable from "@/components/ProductsTable.vue"
 import ProductsCards from "@/components/ProductsCards.vue"
 import IncludeModal from "@/components/IncludeModal.vue"
-import { supabase } from "@/lib/supabase"
+import DateSelector from "@/components/DateSelector.vue"
 
 import store from "@/store/index"
 import { useProductStore } from "@/store/product"
-import { computed, ref } from "vue"
 import { ProductInterface } from "@/interfaces/productInterface"
 
 const productStore = useProductStore(store())
@@ -21,7 +20,6 @@ const deleteProduct = (id) => {
 
 const includeProduct = (product: ProductInterface) => {
     productStore.includeProduct(product)
-    showIncludeModal.value = false
 }
 
 const toggleIncludeDialog = (value: boolean) => {
@@ -35,10 +33,11 @@ onMounted(async () => {
 
 <template>
     <div>
+        <DateSelector />
         <ProductsCards class="d-block d-sm-none" :products="products" @delete-product="deleteProduct" />
         <ProductsTable class="d-none d-sm-block" :products="products" @delete-product="deleteProduct" />
 
-        <v-btn v-if="!showIncludeModal" fab color="blue" icon @click="toggleIncludeDialog(true)">
+        <v-btn v-if="!showIncludeModal" fab color="blue" icon aria-label="Include Button" @click="toggleIncludeDialog(true)">
             <v-icon icon="mdi-plus"></v-icon>
         </v-btn>
         <IncludeModal v-else :show-include-modal="showIncludeModal" @include-product="includeProduct" @close-dialog="toggleIncludeDialog" />

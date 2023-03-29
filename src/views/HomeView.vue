@@ -13,6 +13,7 @@ const productStore = useProductStore(store())
 const showIncludeModal = ref<boolean>(false)
 
 const products = computed<Array<ProductInterface>>(() => productStore.productsList)
+const isLoading = computed<boolean>(() => productStore.isLoading)
 
 const deleteProduct = (id) => {
     productStore.deleteProduct(id)
@@ -34,8 +35,8 @@ onMounted(async () => {
 <template>
     <div>
         <DateSelector />
-        <ProductsCards class="d-block d-sm-none" :products="products" @delete-product="deleteProduct" />
-        <ProductsTable class="d-none d-sm-block" :products="products" @delete-product="deleteProduct" />
+        <ProductsCards class="d-block d-sm-none" :products="products" :is-loading="isLoading" @delete-product="deleteProduct" />
+        <ProductsTable class="d-none d-sm-block" :products="products" :is-loading="isLoading" @delete-product="deleteProduct" />
 
         <v-btn v-if="!showIncludeModal" fab color="blue" icon aria-label="Include Button" @click="toggleIncludeDialog(true)">
             <v-icon icon="mdi-plus"></v-icon>

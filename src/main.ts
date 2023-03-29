@@ -10,6 +10,7 @@ import "@/style.css"
 import "vuetify/styles"
 import { createVuetify } from "vuetify"
 import { md3 } from "vuetify/blueprints"
+import JsonCSV from "vue-json-csv"
 
 const vuetify = createVuetify({
     blueprint: md3,
@@ -28,4 +29,4 @@ if (window.Cypress) {
     window.__product_store__ = ProductStore
 }
 
-createApp(App).use(store).use(router).use(vuetify).mount("#app")
+createApp(App).component("downloadCsv", JsonCSV).use(store).use(JsonCSV).use(router).use(vuetify).mount("#app")

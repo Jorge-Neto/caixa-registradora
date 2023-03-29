@@ -28,3 +28,10 @@ export const isToday = (dateToCompare: string | number | Date) => {
 
     return false
 }
+
+export const measureText = (measure, quantity) => {
+    if (quantity > 1) {
+        measure += "s"
+    }
+    return measure
+}

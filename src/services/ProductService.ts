@@ -17,6 +17,37 @@ class ProductService {
         return []
     }
 
+    getByDate = async (date: string): Promise<Product[]> => {
+        const newDate: string = new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString()
+        const newDateLimit: string = new Date(new Date(date).setHours(23, 59, 59)).toISOString()
+
+        try {
+            const { data, error, status } = await supabase.from("products").select("*").gte("created_at", newDate).lte("created_at", newDateLimit)
+
+            if (error && status !== 406) throw error
+
+            if (data) return data as Array<Product>
+        } catch (error) {
+            console.error("Error retrieving data from db", error)
+        }
+        return []
+    }
+    getByRangeDate = async (date: string): Promise<Product[]> => {
+        const newDate: string = new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString()
+        const newDateLimit: string = new Date(new Date(date).setHours(23, 59, 59)).toISOString()
+
+        try {
+            const { data, error, status } = await supabase.from("products").select("*").gte("created_at", newDate).lte("created_at", newDateLimit)
+
+            if (error && status !== 406) throw error
+
+            if (data) return data as Array<Product>
+        } catch (error) {
+            console.error("Error retrieving data from db", error)
+        }
+        return []
+    }
+
     includeItem = async (product: IncludeProductInterface): Promise<null | number> => {
         try {
             const { status, error } = await supabase.from("products").insert(product).single()
@@ -42,29 +73,6 @@ class ProductService {
             console.error("error", error)
         }
     }
-
-    // getByDate = async (date: string): Promise<Product[]> => {
-    // const newDate: string = new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString()
-    // const newDateLimit: string = new Date(new Date(date).setHours(23, 59, 59)).toISOString()
-
-    // try {
-    //   const { data, error, status } = await supabase
-    //     .from('products')
-    //     .select('*')
-    //     .gte('created_at', newDate)
-    //     .lte('created_at', newDateLimit)
-
-    //   if (error && status !== 406)
-    //     throw error
-
-    //   if (data)
-    //     return data as Array<Product>
-    // }
-    // catch (error) {
-    //   console.error('Error retrieving data from db', error)
-    // }
-    // return []
-    // }
 }
 
 export default ProductService

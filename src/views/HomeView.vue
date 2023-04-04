@@ -38,10 +38,7 @@ onMounted(async () => {
         <ProductsCards class="d-block d-sm-none" :products="products" :is-loading="isLoading" @delete-product="deleteProduct" />
         <ProductsTable class="d-none d-sm-block" :products="products" :is-loading="isLoading" @delete-product="deleteProduct" />
 
-        <v-btn v-if="!showIncludeModal" fab color="blue" icon aria-label="Include Button" @click="toggleIncludeDialog(true)">
-            <v-icon icon="mdi-plus"></v-icon>
-        </v-btn>
-        <IncludeModal v-else :show-include-modal="showIncludeModal" @include-product="includeProduct" @close-dialog="toggleIncludeDialog" />
+        <IncludeModal @include-product="includeProduct" @close-dialog="toggleIncludeDialog" />
     </div>
 </template>
 

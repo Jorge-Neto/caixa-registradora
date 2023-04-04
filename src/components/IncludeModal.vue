@@ -5,10 +5,11 @@ import { ref } from "vue"
 
 const form = ref()
 
-defineProps<{
-    showIncludeModal: boolean
-}>()
+// defineProps<{
+//     showIncludeModal: boolean
+// }>()
 const emit = defineEmits(["includeProduct", "closeDialog"])
+const dialog = ref<boolean>(false)
 const name = ref<string>("")
 const unitary_value = ref<string | number>("")
 const quantity = ref<string | number>("")
@@ -76,34 +77,41 @@ const saveButtonPressed = () => {
 </script>
 
 <template>
-    <v-card class="mx-auto include-dialog">
-        <template #append>
-            <v-btn size="x-small" color="red" icon="mdi-close" @click="$emit('closeDialog', false)"></v-btn>
+    <v-dialog v-model="dialog">
+        <template #activator="{ props }">
+            <v-btn v-bind="props" fab color="blue" icon aria-label="Include Button">
+                <v-icon icon="mdi-plus"></v-icon>
+            </v-btn>
         </template>
-        <v-card-item>
-            <v-form ref="form" fast-fail @submit.prevent="saveButtonPressed()" class="pt-1">
-                <v-text-field required v-model="name" label="Produto" :rules="lengthRule" variant="outlined"></v-text-field>
+        <v-card class="mx-auto include-dialog">
+            <template #append>
+                <v-btn size="x-small" color="red" icon="mdi-close" block @click="dialog = false"></v-btn>
+            </template>
+            <v-card-item>
+                <v-form ref="form" fast-fail @submit.prevent="saveButtonPressed()" class="pt-5 mb-5">
+                    <v-text-field required v-model="name" label="Produto" :rules="lengthRule" variant="outlined"></v-text-field>
 
-                <v-radio-group v-model="measure" label="Medida" inline>
-                    <v-radio v-for="(option, index) in measureItems" required :rules="[(v) => !!v || 'Medida é obrigatório']" :key="`option-${index}`" :label="option" :value="option"></v-radio>
-                </v-radio-group>
+                    <v-radio-group v-model="measure" label="Medida" inline>
+                        <v-radio v-for="(option, index) in measureItems" required :rules="[(v) => !!v || 'Medida é obrigatório']" :key="`option-${index}`" :label="option" :value="option"></v-radio>
+                    </v-radio-group>
 
-                <v-text-field :rules="[(v) => !!v || 'Quantidade é obrigatório']" required v-model="quantity" type="number" :label="changeQuantityLabel()" variant="outlined"></v-text-field>
+                    <v-text-field :rules="[(v) => !!v || 'Quantidade é obrigatório']" required v-model="quantity" type="number" :label="changeQuantityLabel()" variant="outlined"></v-text-field>
 
-                <v-text-field
-                    :rules="[(v) => !!v || 'Valor unitário é obrigatório']"
-                    required
-                    v-model="unitary_value"
-                    type="number"
-                    :label="changeValueLabel()"
-                    prefix="R$"
-                    variant="outlined"
-                ></v-text-field>
+                    <v-text-field
+                        :rules="[(v) => !!v || 'Valor unitário é obrigatório']"
+                        required
+                        v-model="unitary_value"
+                        type="number"
+                        :label="changeValueLabel()"
+                        prefix="R$"
+                        variant="outlined"
+                    ></v-text-field>
 
-                <v-btn color="success" variant="tonal" type="submit" block class="mt-2">Adicionar</v-btn>
-            </v-form>
-        </v-card-item>
-    </v-card>
+                    <v-btn color="success" variant="tonal" type="submit" block class="mt-2">Adicionar</v-btn>
+                </v-form>
+            </v-card-item>
+        </v-card>
+    </v-dialog>
 </template>
 
 <style scoped>

@@ -38,7 +38,6 @@ defineProps<{
                 <v-btn color="error" @click="$emit('deleteProduct', product.id)">Remover</v-btn>
             </v-card-actions>
         </v-card>
-        <download-csv ref="child" class="btn btn-default" :data="products" name="produtos.csv" separator-excel="true"> Download CSV (This is a slot) </download-csv>
     </div>
 </template>
 

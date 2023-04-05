@@ -1,6 +1,6 @@
 import { ref } from "vue"
 import { defineStore } from "pinia"
-import ProductService from "@/services/productService"
+import ProductService from "@/services/ProductService"
 import { useDatetimeStore } from "@/store/datetime"
 import { ProductInterface as Product, IncludeProductInterface } from "@/interfaces/productInterface"
 import store from "@/store/index"

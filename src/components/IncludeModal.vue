@@ -8,7 +8,7 @@ const form = ref()
 // defineProps<{
 //     showIncludeModal: boolean
 // }>()
-const emit = defineEmits(["includeProduct", "closeDialog"])
+const emit = defineEmits(["includeProduct"])
 const dialog = ref<boolean>(false)
 const name = ref<string>("")
 const unitary_value = ref<string | number>("")
@@ -70,7 +70,7 @@ const saveButtonPressed = () => {
         if (res.valid) {
             saveProduct()
             clearFields()
-            emit("closeDialog", false)
+            dialog.value = false
         }
     })
 }
@@ -79,7 +79,7 @@ const saveButtonPressed = () => {
 <template>
     <v-dialog v-model="dialog">
         <template #activator="{ props }">
-            <v-btn v-bind="props" fab color="blue" icon aria-label="Include Button">
+            <v-btn v-bind="props" fab color="indigo" class="mx-1" icon aria-label="Include Button">
                 <v-icon icon="mdi-plus"></v-icon>
             </v-btn>
         </template>

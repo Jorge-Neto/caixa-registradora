@@ -89,25 +89,38 @@ const saveButtonPressed = () => {
             </template>
             <v-card-item>
                 <v-form ref="form" fast-fail @submit.prevent="saveButtonPressed()" class="pt-5 mb-5">
-                    <v-text-field required v-model="name" label="Produto" :rules="lengthRule" variant="outlined"></v-text-field>
-
-                    <v-radio-group v-model="measure" label="Medida" inline>
-                        <v-radio v-for="(option, index) in measureItems" required :rules="[(v) => !!v || 'Medida é obrigatório']" :key="`option-${index}`" :label="option" :value="option"></v-radio>
-                    </v-radio-group>
-
-                    <v-text-field :rules="[(v) => !!v || 'Quantidade é obrigatório']" required v-model="quantity" type="number" :label="changeQuantityLabel()" variant="outlined"></v-text-field>
-
-                    <v-text-field
-                        :rules="[(v) => !!v || 'Valor unitário é obrigatório']"
-                        required
-                        v-model="unitary_value"
-                        type="number"
-                        :label="changeValueLabel()"
-                        prefix="R$"
-                        variant="outlined"
-                    ></v-text-field>
-
-                    <v-btn color="success" variant="tonal" type="submit" block class="mt-2">Adicionar</v-btn>
+                    <v-col cols="12">
+                        <v-text-field required v-model="name" label="Produto" :rules="lengthRule" variant="outlined"></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-radio-group v-model="measure" label="Medida" inline>
+                            <v-radio
+                                v-for="(option, index) in measureItems"
+                                required
+                                :rules="[(v) => !!v || 'Medida é obrigatório']"
+                                :key="`option-${index}`"
+                                :label="option"
+                                :value="option"
+                            ></v-radio>
+                        </v-radio-group>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-text-field :rules="[(v) => !!v || 'Quantidade é obrigatório']" required v-model="quantity" type="number" :label="changeQuantityLabel()" variant="outlined"></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-text-field
+                            :rules="[(v) => !!v || 'Valor unitário é obrigatório']"
+                            required
+                            v-model="unitary_value"
+                            type="number"
+                            :label="changeValueLabel()"
+                            prefix="R$"
+                            variant="outlined"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-btn color="success" variant="tonal" type="submit" block class="mt-2">Adicionar</v-btn>
+                    </v-col>
                 </v-form>
             </v-card-item>
         </v-card>

@@ -1,27 +1,33 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
+    "compilerOptions":{
+       "paths":{
+          "@/*":["./src/*"]
+       },
+       "target":"ESNext",
+       "module":"ESNext",
+       "useDefineForClassFields":true,
+       "moduleResolution":"node",
+       "strict":true,
+       "jsx":"preserve",
+       "sourceMap":true,
+       "resolveJsonModule":true,
+       "isolatedModules":true,
+       "esModuleInterop":true,
+       "lib":["ESNext", "DOM"],
+       "skipLibCheck":true,
+       "noEmit":true,
+       "noImplicitAny":false,
+       "types":["cypress"],
     },
-    "target": "ESNext",
-    "module": "ESNext",
-    "useDefineForClassFields": true,
-    "moduleResolution": "Node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true,
-    "noEmit": true,
-    "noImplicitAny":  false,
-    "types": ["cypress"],
-  },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "**/*.ts"],
-  "exclude": [
-    "node_modules"
-  ],
-  "references": [{ "path": "./tsconfig.node.json" }]
-}
+    "include":[
+       "src/**/*.ts",
+       "src/**/*.d.ts",
+       "src/**/*.tsx",
+       "src/**/*.vue",
+       "**/*.ts"
+    ],
+    "exclude":[
+       "dist",
+       "node_modules"
+    ],
+ }

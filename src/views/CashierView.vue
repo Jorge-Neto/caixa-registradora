@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, computed } from "vue"
-import ProductsTable from "@/components/ProductsTable.vue"
-import ProductsCards from "@/components/ProductsCards.vue"
-import IncludeModal from "@/components/IncludeModal.vue"
-import ExportModal from "@/components/ExportModal.vue"
-import DateSelector from "@/components/DateSelector.vue"
+import DateSelector from "@/components/cashier/DateSelector.vue"
+import ExportModal from "@/components/cashier/ExportModal.vue"
+import IncludeModal from "@/components/cashier/IncludeModal.vue"
+import ProductsCards from "@/components/cashier/ProductsCards.vue"
+import ProductsTable from "@/components/cashier/ProductsTable.vue"
 
 import store from "@/store/index"
 import { useProductStore } from "@/store/product"

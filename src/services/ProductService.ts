@@ -17,12 +17,17 @@ class ProductService {
         return []
     }
 
-    getByDate = async (date: string): Promise<Product[]> => {
+    getByDate = async (date: string, dateLimit: string | null = null): Promise<Product[]> => {
         const newDate: string = new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString()
-        const newDateLimit: string = new Date(new Date(date).setHours(23, 59, 59)).toISOString()
+        let newDateLimit = ""
+        if (dateLimit) {
+            newDateLimit = new Date(new Date(dateLimit).setHours(23, 59, 59)).toISOString()
+        } else {
+            newDateLimit = new Date(new Date(date).setHours(23, 59, 59)).toISOString()
+        }
 
         try {
-            const { data, error, status } = await supabase.from("products").select("*").gte("created_at", newDate).lte("created_at", newDateLimit)
+            const { data, error, status } = await supabase.from("products").select("*").gt("created_at", newDate).lte("created_at", newDateLimit)
 
             if (error && status !== 406) throw error
 

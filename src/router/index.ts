@@ -6,6 +6,7 @@ const NotFoundView = () => import("@/views/NotFoundView.vue")
 
 const routes: Array<RouteRecordRaw> = [
     { path: "/", name: "Cashier", component: CashierView },
+    { path: "/index.html", redirect: { name: "Cashier" } },
     { path: "/management", name: "Products", component: ProductsView },
     {
         // path: "*",

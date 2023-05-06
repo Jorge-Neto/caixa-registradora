@@ -1,5 +1,8 @@
 export const toLocaleBRL = (value: number) => {
-    return `R$${value.toLocaleString("pt-br", { style: "decimal", minimumFractionDigits: 2 })}`
+    if (value) {
+        return `R$${value.toLocaleString("pt-br", { style: "decimal", minimumFractionDigits: 2 })}`
+    }
+    return ""
 }
 
 export const formatDate = (dateToFormat: string) => {
@@ -18,7 +21,10 @@ export const formatDateTime = (dateString: string) => {
 }
 
 export const formatToDay = (dateToFormat: Date) => {
-    return dateToFormat.toLocaleString("default", { month: "long", day: "2-digit" })
+    if (dateToFormat) {
+        return dateToFormat.toLocaleString("default", { month: "long", day: "2-digit" })
+    }
+    return ""
 }
 
 export const isToday = (dateToCompare: string | number | Date) => {

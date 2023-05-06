@@ -9,11 +9,15 @@ import "@/style.css"
 
 import "vuetify/styles"
 import { createVuetify } from "vuetify"
+import { VDataTable } from "vuetify/labs/VDataTable"
 import { md3 } from "vuetify/blueprints"
 import JsonCSV from "vue-json-csv"
 
 const vuetify = createVuetify({
     blueprint: md3,
+    components: {
+        VDataTable,
+    },
 })
 
 declare global {

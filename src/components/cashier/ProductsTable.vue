@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toLocaleBRL, formatTime, measureText } from "@/utils/filters"
+import { toLocaleBRL, formatTime, measureText } from "@/composables/filters"
 import { ProductInterface } from "@/interfaces/productInterface"
 import { ref } from "vue"
 

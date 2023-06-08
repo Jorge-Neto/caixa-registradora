@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { toLocaleBRL, measureText } from "@/utils/filters"
+import { toLocaleBRL, measureText } from "@/composables/filters"
 
 import store from "@/store/index"
 import { useProductStore } from "@/store/product"

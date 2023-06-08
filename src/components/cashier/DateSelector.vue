@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDatetimeStore } from "@/store/datetime"
 import { useProductStore } from "@/store/product"
-import { isToday } from "@/utils/filters"
+import { isToday } from "@/composables/filters"
 import { computed, watch } from "vue"
 
 import store from "@/store/index"

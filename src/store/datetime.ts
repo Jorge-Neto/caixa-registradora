@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { computed, ref } from "vue"
-import { formatToDay } from "@/utils/filters"
+import { formatToDay } from "@/composables/filters"
 
 export const useDatetimeStore = defineStore("datetime", () => {
     const date = ref<Date>(new Date())

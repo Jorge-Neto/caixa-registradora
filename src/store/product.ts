@@ -20,7 +20,7 @@ export const useProductStore = defineStore("product", () => {
             .finally(() => (isLoading.value = false))
     }
 
-    const fetchByDate = async (getDate: string) => {
+    const fetchByDate = async (getDate: string = dateStore.date.toString()) => {
         let products: Array<Product> = []
         isLoading.value = true
 
@@ -34,12 +34,12 @@ export const useProductStore = defineStore("product", () => {
 
     const deleteProduct = async (id: number | string) => {
         await service.deleteItem(id)
-        fetchByDate(dateStore.date.toString())
+        fetchByDate()
     }
 
     const includeProduct = async (product: IncludeProductInterface) => {
         await service.includeItem(product)
-        fetchByDate(dateStore.date.toString())
+        fetchByDate()
     }
 
     return { productsList, isLoading, fetchProducts, fetchByDate, deleteProduct, includeProduct }

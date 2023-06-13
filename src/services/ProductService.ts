@@ -37,6 +37,7 @@ class ProductService {
         }
         return []
     }
+
     getByRangeDate = async (date: string): Promise<Product[]> => {
         const newDate: string = new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString()
         const newDateLimit: string = new Date(new Date(date).setHours(23, 59, 59)).toISOString()

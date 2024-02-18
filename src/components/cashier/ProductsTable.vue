@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { toLocaleBRL, formatTime, measureText } from "@/composables/filters"
-import { ProductInterface } from "@/interfaces/productInterface"
+import { ProductInterface, ProductTableHeaderInterface } from "@/interfaces/productInterface"
 import { ref } from "vue"
 
-const headers = ref([
+const headers = ref<ProductTableHeaderInterface[]>([
     {
         title: "Hora",
         align: "start",
@@ -38,7 +38,6 @@ const headers = ref([
         title: "Ação",
         align: "center",
         key: "actions",
-        sortable: false,
     },
 ])
 
@@ -63,19 +62,19 @@ defineProps<{
                 class="elevation-1"
             >
                 <template #[`item.created_at`]="{ item }">
-                    {{ formatTime(item.raw.created_at) }}
+                    {{ formatTime(item.created_at) }}
                 </template>
                 <template #[`item.unitary_value`]="{ item }">
-                    {{ toLocaleBRL(item.raw.unitary_value) }}
+                    {{ toLocaleBRL(item.unitary_value) }}
                 </template>
                 <template #[`item.measure`]="{ item }">
-                    {{ measureText(item.raw.measure, item.raw.quantity) }}
+                    {{ measureText(item.measure, item.quantity) }}
                 </template>
                 <template #[`item.total`]="{ item }">
-                    {{ toLocaleBRL(item.raw.unitary_value * item.raw.quantity) }}
+                    {{ toLocaleBRL(item.unitary_value * item.quantity) }}
                 </template>
                 <template #[`item.actions`]="{ item }">
-                    <v-btn color="error" variant="tonal" @click="$emit('deleteProduct', item.raw.id)">Remover</v-btn>
+                    <v-btn color="error" variant="tonal" @click="$emit('deleteProduct', item.id)">Remover</v-btn>
                 </template>
                 <template #loading>
                     <v-progress-circular color="dark-blue" :size="36" indeterminate></v-progress-circular>

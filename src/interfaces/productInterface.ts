@@ -14,3 +14,9 @@ export interface IncludeProductInterface {
     measure: string
     quantity: number
 }
+
+export interface ProductTableHeaderInterface {
+    key?: "data-table-group" | "data-table-select" | "data-table-expand" | string | undefined
+    title?: string | undefined
+    align?: "start" | "end" | "center" | undefined
+}

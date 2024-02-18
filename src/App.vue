@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import HeaderComponent from "@/components/HeaderComponent.vue"
+import AppLayout from "@/layouts/AppLayout.vue"
 </script>
 
 <template>
-    <div>
-        <HeaderComponent />
-        <router-view></router-view>
-    </div>
+    <AppLayout />
 </template>
 
 <style scoped></style>

@@ -69,6 +69,7 @@ const getFileName = () => {
                     <span>Até</span>
                     <v-chip variant="text" class="mx-2"><v-text-field @change="changeEndDate" hide-details="auto" type="date"></v-text-field></v-chip>
                     <br />
+                    <v-date-picker></v-date-picker>
                     <v-btn fab color="blue" class="my-2" :disabled="productStore.isLoading">
                         <v-icon icon="mdi-download"></v-icon>
                         <download-csv ref="child" :data="filteredProducts" :name="getFileName()" :separator-excel="true"> Baixar dados </download-csv>

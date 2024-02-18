@@ -3,21 +3,16 @@ import { createApp } from "vue/dist/vue.esm-bundler"
 import App from "@/App.vue"
 import store from "@/store"
 import router from "@/router"
-import { Store } from "pinia"
 import { useProductStore } from "@/store/product"
 import "@/style.css"
 
 import "vuetify/styles"
 import { createVuetify } from "vuetify"
-import { VDataTable } from "vuetify/labs/VDataTable"
 import { md3 } from "vuetify/blueprints"
 import JsonCSV from "vue-json-csv"
 
 const vuetify = createVuetify({
     blueprint: md3,
-    components: {
-        VDataTable,
-    },
 })
 
 declare global {

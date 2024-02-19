@@ -1,9 +1,9 @@
 import { RouteRecordRaw } from "vue-router"
 
 const routes: Array<RouteRecordRaw> = [
-    { path: "/index.html", redirect: { name: "Cashier" } },
+    { path: "/", redirect: { name: "Login" } },
     {
-        path: "/",
+        path: "/cashier",
         name: "Cashier",
         component: () => import("@/views/CashierView.vue"),
         meta: {

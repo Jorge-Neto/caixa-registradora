@@ -3,7 +3,7 @@
 <template>
     <v-layout v-if="$route.name != 'NotFound'" class="top-bar">
         <v-app-bar class="top-bar-list">
-            <router-link class="left-link" to="/"><v-btn :disabled="$route.name == 'Cashier'">Resumo do dia</v-btn></router-link>
+            <router-link class="left-link" to="/cashier"><v-btn :disabled="$route.name == 'Cashier'">Resumo do dia</v-btn></router-link>
             <router-link class="right-link" to="/management"><v-btn :disabled="$route.name == 'Products'">Produtos cadastrados</v-btn></router-link>
         </v-app-bar>
     </v-layout>

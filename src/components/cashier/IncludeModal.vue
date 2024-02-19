@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { IncludeProductInterface } from "@/interfaces/productInterface"
-import { ValidationRule } from "@/interfaces/validatorType"
 import { ref } from "vue"
+import { ValidationRule } from "@/interfaces/validatorType"
+import { IncludeProductInterface } from "@/interfaces/productInterface"
 
 const form = ref()
 

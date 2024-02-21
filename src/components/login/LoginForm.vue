@@ -19,8 +19,6 @@ const requiredRule = ref<Array<ValidationRule>>([
     },
 ])
 
-const registerUser = async () => {}
-
 const LoginButtonPressed = async () => {
     try {
         await form.value.validate()
@@ -37,8 +35,8 @@ const LoginButtonPressed = async () => {
         <v-text-field v-model="password" :rules="requiredRule" label="Senha" type="password" required></v-text-field>
 
         <div class="d-flex flex-column">
-            <v-btn color="success" class="mt-4" type="submit" block> Login </v-btn>
-            <v-btn variant="text" class="mt-4" disabled block @click="registerUser" to="/register"> Cadastrar </v-btn>
+            <v-btn color="success" class="mt-4" block type="submit"> Login </v-btn>
+            <v-btn variant="text" class="mt-4" block to="/register"> Cadastrar </v-btn>
         </div>
     </v-form>
 </template>

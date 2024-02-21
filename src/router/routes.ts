@@ -19,9 +19,18 @@ const routes: Array<RouteRecordRaw> = [
         },
     },
     {
-        path: "/login",
+        path: "/",
         name: "Login",
         component: () => import("@/views/LoginView.vue"),
+        meta: {
+            layout: "AppLayoutLogin",
+        },
+        alias: "/login",
+    },
+    {
+        path: "/register",
+        name: "Register",
+        component: () => import("@/views/RegisterView.vue"),
         meta: {
             layout: "AppLayoutLogin",
         },

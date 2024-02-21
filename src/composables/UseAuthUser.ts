@@ -1,7 +1,8 @@
 import { supabase } from "@/lib/supabase"
+import { User } from "@supabase/supabase-js"
 import { ref } from "vue"
 
-const user = ref(null)
+const user = ref<User | null>(null)
 export default function useAuthUser() {
     const login = async ({ email, password }) => {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password })
@@ -9,6 +10,7 @@ export default function useAuthUser() {
 
         return data.user
     }
+
     const loginWithSocialProvider = async (provider) => {
         const { data, error } = await supabase.auth.signInWithOAuth({ provider })
         if (error) throw error
@@ -24,6 +26,7 @@ export default function useAuthUser() {
     const isLoggedIn = async () => {
         return !!user.value
     }
+
     const register = async ({ email, password }) => {
         const { data, error } = await supabase.auth.signUp({ email, password })
         if (error) throw error

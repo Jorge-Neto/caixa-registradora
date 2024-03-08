@@ -36,6 +36,22 @@ const routes: Array<RouteRecordRaw> = [
         },
     },
     {
+        path: "/email-confirmation",
+        name: "EmailConfirmation",
+        component: () => import("@/views/EmailConfirmationView.vue"),
+        meta: {
+            layout: "AppLayoutLogin",
+        },
+    },
+    {
+        path: "/me",
+        name: "UserInfoView",
+        component: () => import("@/views/UserInfoView.vue"),
+        meta: {
+            layout: "AppLayoutLogin",
+        },
+    },
+    {
         path: "/:catchAll(.*)",
         name: "NotFound",
         component: () => import("@/views/NotFoundView.vue"),

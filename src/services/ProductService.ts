@@ -1,5 +1,7 @@
-import { supabase } from "@/lib/supabase"
 import { ProductInterface as Product, IncludeProductInterface } from "@/interfaces/productInterface"
+import useSupabase from "@/lib/supabase"
+
+const { supabase } = useSupabase()
 
 class ProductService {
     getAll = async (): Promise<Product[]> => {

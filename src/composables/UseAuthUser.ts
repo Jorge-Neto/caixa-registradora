@@ -1,9 +1,13 @@
-import { supabase } from "@/lib/supabase"
+import useSupabase from "@/lib/supabase"
+
 import { User } from "@supabase/supabase-js"
 import { ref } from "vue"
 
 const user = ref<User | null>(null)
+
 export default function useAuthUser() {
+    const { supabase } = useSupabase()
+
     const login = async ({ email, password }) => {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw error
@@ -27,8 +31,16 @@ export default function useAuthUser() {
         return !!user.value
     }
 
-    const register = async ({ email, password }) => {
-        const { data, error } = await supabase.auth.signUp({ email, password })
+    const register = async ({ name, email, password }) => {
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    first_name: name,
+                },
+            },
+        })
         if (error) throw error
 
         return data.user

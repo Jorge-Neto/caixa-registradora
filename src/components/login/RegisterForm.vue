@@ -22,9 +22,11 @@ const requiredRule = ref<Array<ValidationRule>>([
 
 const registerUser = async () => {
     try {
-        await form.value.validate()
-        await register({ email: email.value, password: password.value })
-        router.push({ name: "Cashier" })
+        const { valid } = await form.value.validate()
+        if (valid) {
+            await register({ name: name.value, email: email.value, password: password.value })
+            router.push({ name: "EmailConfirmation", query: { email: email.value } })
+        }
     } catch (error) {
         alert(error)
     }

@@ -21,9 +21,11 @@ const requiredRule = ref<Array<ValidationRule>>([
 
 const LoginButtonPressed = async () => {
     try {
-        await form.value.validate()
-        await login({ email: email.value, password: password.value })
-        router.push({ name: "Cashier" })
+        const { valid } = await form.value.validate()
+        if (valid) {
+            await login({ email: email.value, password: password.value })
+            router.push({ name: "Cashier" })
+        }
     } catch (error) {
         alert(error)
     }

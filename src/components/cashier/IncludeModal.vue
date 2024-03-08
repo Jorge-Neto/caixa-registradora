@@ -66,8 +66,8 @@ const saveProduct = () => {
 }
 
 const saveButtonPressed = () => {
-    form.value.validate().then((res) => {
-        if (res.valid) {
+    form.value.validate().then(({ valid }) => {
+        if (valid) {
             saveProduct()
             clearFields()
             dialog.value = false
